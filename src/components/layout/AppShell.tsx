@@ -6,15 +6,22 @@ import { Sidebar } from './Sidebar'
 
 interface AppShellProps {
   children: ReactNode
+  searchTerm: string
+  onSearchChange: (value: string) => void
+  filterSummary: string
 }
 
-export function AppShell({ children }: AppShellProps) {
+export function AppShell({ children, searchTerm, onSearchChange, filterSummary }: AppShellProps) {
   return (
     <div className="mx-auto flex min-h-screen max-w-[1680px] flex-col gap-4 p-4 lg:flex-row lg:gap-6 lg:p-4">
       <Sidebar items={navigationItems} />
 
       <div className="flex min-w-0 flex-1 flex-col gap-4 lg:gap-6">
-        <Header />
+        <Header
+          searchTerm={searchTerm}
+          onSearchChange={onSearchChange}
+          filterSummary={filterSummary}
+        />
         <main>{children}</main>
       </div>
     </div>
