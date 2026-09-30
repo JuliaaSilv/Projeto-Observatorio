@@ -21,9 +21,10 @@ const iconMap: Record<NavIconName, LucideIcon> = {
 
 interface SidebarProps {
   items: NavigationItem[]
+  onSelectPage?: (pageId: string) => void
 }
 
-export function Sidebar({ items }: SidebarProps) {
+export function Sidebar({ items, onSelectPage }: SidebarProps) {
   return (
     <aside className="panel relative overflow-hidden px-4 py-5 lg:min-h-[calc(100vh-2rem)] lg:w-80 lg:px-5 lg:py-6">
       <div className="absolute inset-x-0 top-0 h-24 bg-gradient-to-r from-brand-900 via-brand-700 to-brand-500 opacity-95" />
@@ -50,12 +51,17 @@ export function Sidebar({ items }: SidebarProps) {
                 <li key={item.id}>
                   <button
                     type="button"
+                    disabled={!item.isAvailable}
+                    onClick={() => item.isAvailable && onSelectPage?.(item.id)}
                     className={[
                       'flex w-full items-center gap-3 rounded-2xl border px-4 py-3 text-left transition',
                       item.isActive
                         ? 'border-brand-200 bg-brand-50 text-brand-900 shadow-sm'
                         : 'border-slate-200 bg-white text-slate-600 hover:border-brand-100 hover:bg-slate-50',
-                    ].join(' ')}
+                      !item.isAvailable && 'opacity-60 cursor-not-allowed',
+                    ]
+                      .filter(Boolean)
+                      .join(' ')}
                     aria-current={item.isActive ? 'page' : undefined}
                   >
                     <span
