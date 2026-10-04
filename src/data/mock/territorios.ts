@@ -1,0 +1,347 @@
+import type { DashboardHero, Metric } from '../../types/dashboard'
+
+export const territoriosHero: DashboardHero = {
+  title: 'Panorama Territorial dos Bairros do Recife',
+  description:
+    'Análise granular do mercado de trabalho, desemprego juvenil e informalidade por Bairros e Regiões Político-Administrativas (RPAs).',
+  note:
+    'Os dados apresentados são agregados em conformidade com as diretrizes de anonimização e LGPD para recortes intraurbanos.',
+}
+
+export interface BairroData {
+  id: string
+  nome: string
+  rpa: string
+  rpaNome: string
+  populacao: number
+  taxaDesemprego: number
+  desempregoJovem: number // 18-24 anos
+  taxaInformalidade: number
+  rendaMedia: number
+  postosFormais: number
+  setorPredominante: string
+  vulnerabilidade: 'Baixa' | 'Média' | 'Alta' | 'Muito Alta'
+}
+
+export interface RpaSummary {
+  rpa: string
+  nome: string
+  populacaoTotal: number
+  taxaDesempregoMedia: number
+  desempregoJovemMedio: number
+  taxaInformalidadeMedia: number
+  rendaMedia: number
+  principaisBairros: string[]
+}
+
+export const rpaList: RpaSummary[] = [
+  {
+    rpa: 'RPA 1',
+    nome: 'Centro',
+    populacaoTotal: 78500,
+    taxaDesempregoMedia: 11.8,
+    desempregoJovemMedio: 18.2,
+    taxaInformalidadeMedia: 34.2,
+    rendaMedia: 2980,
+    principaisBairros: ['Santo Amaro', 'Boa Vista', 'Bairro do Recife', 'São José', 'Ilha do Leite'],
+  },
+  {
+    rpa: 'RPA 2',
+    nome: 'Norte',
+    populacaoTotal: 215400,
+    taxaDesempregoMedia: 13.1,
+    desempregoJovemMedio: 21.4,
+    taxaInformalidadeMedia: 39.5,
+    rendaMedia: 2210,
+    principaisBairros: ['Encruzilhada', 'Campo Grande', 'Arruda', 'Hipódromo', 'Campina do Barreto'],
+  },
+  {
+    rpa: 'RPA 3',
+    nome: 'Noroeste',
+    populacaoTotal: 326700,
+    taxaDesempregoMedia: 12.3,
+    desempregoJovemMedio: 19.8,
+    taxaInformalidadeMedia: 36.1,
+    rendaMedia: 3450,
+    principaisBairros: ['Casa Amarela', 'Casa Forte', 'Graças', 'Nova Descoberta', 'Alto José do Pinho'],
+  },
+  {
+    rpa: 'RPA 4',
+    nome: 'Oeste',
+    populacaoTotal: 294200,
+    taxaDesempregoMedia: 12.9,
+    desempregoJovemMedio: 20.6,
+    taxaInformalidadeMedia: 37.8,
+    rendaMedia: 2620,
+    principaisBairros: ['Várzea', 'Cordeiro', 'Iputinga', 'Madalena', 'Torre', 'Cidade Universitária'],
+  },
+  {
+    rpa: 'RPA 5',
+    nome: 'Sudoeste',
+    populacaoTotal: 298900,
+    taxaDesempregoMedia: 14.5,
+    desempregoJovemMedio: 24.3,
+    taxaInformalidadeMedia: 44.1,
+    rendaMedia: 1940,
+    principaisBairros: ['Afogados', 'Areias', 'Barro', 'Jardim São Paulo', 'San Martin', 'Mustardinha'],
+  },
+  {
+    rpa: 'RPA 6',
+    nome: 'Sul',
+    populacaoTotal: 386300,
+    taxaDesempregoMedia: 12.7,
+    desempregoJovemMedio: 22.1,
+    taxaInformalidadeMedia: 38.9,
+    rendaMedia: 3760,
+    principaisBairros: ['Boa Viagem', 'Ibura', 'Pina', 'Imbiribeira', 'Ipsep', 'Brasília Teimosa', 'Jordão'],
+  },
+]
+
+export const bairrosData: BairroData[] = [
+  {
+    id: 'boa-viagem',
+    nome: 'Boa Viagem',
+    rpa: 'RPA 6',
+    rpaNome: 'Sul',
+    populacao: 123400,
+    taxaDesemprego: 8.4,
+    desempregoJovem: 13.2,
+    taxaInformalidade: 22.4,
+    rendaMedia: 5120,
+    postosFormais: 68400,
+    setorPredominante: 'Serviços & Turismo',
+    vulnerabilidade: 'Baixa',
+  },
+  {
+    id: 'ibura',
+    nome: 'Ibura',
+    rpa: 'RPA 6',
+    rpaNome: 'Sul',
+    populacao: 52100,
+    taxaDesemprego: 17.8,
+    desempregoJovem: 29.4,
+    taxaInformalidade: 52.8,
+    rendaMedia: 1380,
+    postosFormais: 8200,
+    setorPredominante: 'Comércio Popular',
+    vulnerabilidade: 'Muito Alta',
+  },
+  {
+    id: 'varzea',
+    nome: 'Várzea',
+    rpa: 'RPA 4',
+    rpaNome: 'Oeste',
+    populacao: 74300,
+    taxaDesemprego: 13.2,
+    desempregoJovem: 21.6,
+    taxaInformalidade: 39.1,
+    rendaMedia: 2250,
+    postosFormais: 21300,
+    setorPredominante: 'Educação & Serviços',
+    vulnerabilidade: 'Média',
+  },
+  {
+    id: 'casa-forte',
+    nome: 'Casa Forte',
+    rpa: 'RPA 3',
+    rpaNome: 'Noroeste',
+    populacao: 18200,
+    taxaDesemprego: 7.2,
+    desempregoJovem: 10.8,
+    taxaInformalidade: 19.5,
+    rendaMedia: 6450,
+    postosFormais: 14200,
+    setorPredominante: 'Serviços Médicos & Consultorias',
+    vulnerabilidade: 'Baixa',
+  },
+  {
+    id: 'gracas',
+    nome: 'Graças',
+    rpa: 'RPA 3',
+    rpaNome: 'Noroeste',
+    populacao: 24800,
+    taxaDesemprego: 7.8,
+    desempregoJovem: 11.4,
+    taxaInformalidade: 20.8,
+    rendaMedia: 5890,
+    postosFormais: 19800,
+    setorPredominante: 'Serviços & Gastronomia',
+    vulnerabilidade: 'Baixa',
+  },
+  {
+    id: 'santo-amaro',
+    nome: 'Santo Amaro',
+    rpa: 'RPA 1',
+    rpaNome: 'Centro',
+    populacao: 28900,
+    taxaDesemprego: 13.9,
+    desempregoJovem: 23.8,
+    taxaInformalidade: 41.2,
+    rendaMedia: 2190,
+    postosFormais: 42100,
+    setorPredominante: 'Tecnologia & Serviços Públicos',
+    vulnerabilidade: 'Média',
+  },
+  {
+    id: 'bairro-do-recife',
+    nome: 'Bairro do Recife',
+    rpa: 'RPA 1',
+    rpaNome: 'Centro',
+    populacao: 1200,
+    taxaDesemprego: 9.1,
+    desempregoJovem: 14.5,
+    taxaInformalidade: 24.0,
+    rendaMedia: 4950,
+    postosFormais: 31500,
+    setorPredominante: 'Tecnologia (Porto Digital) & Economia Criativa',
+    vulnerabilidade: 'Baixa',
+  },
+  {
+    id: 'afogados',
+    nome: 'Afogados',
+    rpa: 'RPA 5',
+    rpaNome: 'Sudoeste',
+    populacao: 38600,
+    taxaDesemprego: 14.2,
+    desempregoJovem: 23.9,
+    taxaInformalidade: 45.3,
+    rendaMedia: 1890,
+    postosFormais: 17400,
+    setorPredominante: 'Comércio Varejista & Logística',
+    vulnerabilidade: 'Alta',
+  },
+  {
+    id: 'casa-amarela',
+    nome: 'Casa Amarela',
+    rpa: 'RPA 3',
+    rpaNome: 'Noroeste',
+    populacao: 31200,
+    taxaDesemprego: 14.8,
+    desempregoJovem: 24.7,
+    taxaInformalidade: 43.6,
+    rendaMedia: 1980,
+    postosFormais: 15600,
+    setorPredominante: 'Comércio de Rua & Serviços Pessoais',
+    vulnerabilidade: 'Alta',
+  },
+  {
+    id: 'alto-jose-do-pinho',
+    nome: 'Alto José do Pinho',
+    rpa: 'RPA 3',
+    rpaNome: 'Noroeste',
+    populacao: 13400,
+    taxaDesemprego: 17.1,
+    desempregoJovem: 28.1,
+    taxaInformalidade: 51.4,
+    rendaMedia: 1410,
+    postosFormais: 1200,
+    setorPredominante: 'Economia Comunitária & Informal',
+    vulnerabilidade: 'Muito Alta',
+  },
+  {
+    id: 'cohab',
+    nome: 'Cohab',
+    rpa: 'RPA 6',
+    rpaNome: 'Sul',
+    populacao: 67800,
+    taxaDesemprego: 16.5,
+    desempregoJovem: 27.5,
+    taxaInformalidade: 48.7,
+    rendaMedia: 1530,
+    postosFormais: 7900,
+    setorPredominante: 'Serviços Residenciais & Comércio',
+    vulnerabilidade: 'Muito Alta',
+  },
+  {
+    id: 'cordeiro',
+    nome: 'Cordeiro',
+    rpa: 'RPA 4',
+    rpaNome: 'Oeste',
+    populacao: 41500,
+    taxaDesemprego: 11.6,
+    desempregoJovem: 18.7,
+    taxaInformalidade: 33.5,
+    rendaMedia: 2840,
+    postosFormais: 16300,
+    setorPredominante: 'Serviços & Oficinas Especializadas',
+    vulnerabilidade: 'Média',
+  },
+  {
+    id: 'pina',
+    nome: 'Pina',
+    rpa: 'RPA 6',
+    rpaNome: 'Sul',
+    populacao: 32400,
+    taxaDesemprego: 13.8,
+    desempregoJovem: 23.2,
+    taxaInformalidade: 42.0,
+    rendaMedia: 3200,
+    postosFormais: 28100,
+    setorPredominante: 'Centros Empresariais & Gastronomia',
+    vulnerabilidade: 'Média',
+  },
+  {
+    id: 'campo-grande',
+    nome: 'Campo Grande',
+    rpa: 'RPA 2',
+    rpaNome: 'Norte',
+    populacao: 35100,
+    taxaDesemprego: 12.8,
+    desempregoJovem: 20.9,
+    taxaInformalidade: 38.4,
+    rendaMedia: 2320,
+    postosFormais: 11800,
+    setorPredominante: 'Comércio e Reparos',
+    vulnerabilidade: 'Média',
+  },
+]
+
+export const territoriosMetrics: Metric[] = [
+  {
+    id: 'total-bairros',
+    title: 'Bairros mapeados',
+    value: '94 bairros',
+    variation: '6 RPAs',
+    trend: 'neutral',
+    icon: 'building-2',
+  },
+  {
+    id: 'desemprego-jovem-medio',
+    title: 'Desemprego jovem (18-24)',
+    value: '21,8%',
+    variation: '+3,4% vs adultos',
+    trend: 'negative',
+    icon: 'users',
+  },
+  {
+    id: 'disparidade-renda',
+    title: 'Disparidade de renda entre bairros',
+    value: '4,7x',
+    variation: 'Casa Forte / Ibura',
+    trend: 'negative',
+    icon: 'trending-down',
+  },
+  {
+    id: 'taxa-informalidade-recife',
+    title: 'Taxa média de informalidade',
+    value: '38,6%',
+    variation: '-0,9% ano',
+    trend: 'positive',
+    icon: 'users',
+  },
+]
+
+export const rankingDesempregoJovem = [
+  { bairro: 'Ibura', taxa: 29.4, media: 21.8 },
+  { bairro: 'Alto José do Pinho', taxa: 28.1, media: 21.8 },
+  { bairro: 'Cohab', taxa: 27.5, media: 21.8 },
+  { bairro: 'Casa Amarela', taxa: 24.7, media: 21.8 },
+  { bairro: 'Afogados', taxa: 23.9, media: 21.8 },
+  { bairro: 'Santo Amaro', taxa: 23.8, media: 21.8 },
+  { bairro: 'Várzea', taxa: 21.6, media: 21.8 },
+  { bairro: 'Cordeiro', taxa: 18.7, media: 21.8 },
+  { bairro: 'Bairro do Recife', taxa: 14.5, media: 21.8 },
+  { bairro: 'Boa Viagem', taxa: 13.2, media: 21.8 },
+  { bairro: 'Graças', taxa: 11.4, media: 21.8 },
+  { bairro: 'Casa Forte', taxa: 10.8, media: 21.8 },
+]

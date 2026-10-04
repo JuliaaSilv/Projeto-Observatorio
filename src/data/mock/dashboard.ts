@@ -10,11 +10,11 @@ import type {
 
 export const navigationItems: NavigationItem[] = [
   { id: 'inicio', label: 'Início', icon: 'home', isActive: true, isAvailable: true },
-  { id: 'emprego', label: 'Emprego', icon: 'briefcase', isAvailable: true }, // Mude para true
-  { id: 'renda', label: 'Renda', icon: 'wallet', isAvailable: false },
-  { id: 'territorios', label: 'Territórios', icon: 'map', isAvailable: false },
-  { id: 'dados', label: 'Dados', icon: 'database', isAvailable: false },
-  { id: 'metodologia', label: 'Metodologia', icon: 'book-open', isAvailable: false },
+  { id: 'emprego', label: 'Emprego', icon: 'briefcase', isAvailable: true },
+  { id: 'renda', label: 'Renda', icon: 'wallet', isAvailable: true },
+  { id: 'territorios', label: 'Territórios', icon: 'map', isAvailable: true },
+  { id: 'dados', label: 'Dados', icon: 'database', isAvailable: true },
+  { id: 'metodologia', label: 'Metodologia', icon: 'book-open', isAvailable: true },
 ]
 
 export const dashboardHero: DashboardHero = {

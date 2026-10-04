@@ -64,6 +64,7 @@ export function EmpregoPage() {
         filters={dashboardFilters}
         values={filterValues}
         onFilterChange={handleFilterChange}
+        onResetFilters={() => setFilterValues(initialFilterState)}
       />
 
       {/* Cards de Métricas de Emprego */}
