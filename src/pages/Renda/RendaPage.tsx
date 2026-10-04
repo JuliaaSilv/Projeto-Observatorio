@@ -3,7 +3,6 @@ import {
   AlertCircle,
   Coins,
   Scale,
-  TrendingUp,
   Users,
 } from 'lucide-react'
 import {
