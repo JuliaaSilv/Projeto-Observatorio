@@ -6,8 +6,8 @@ import { EmpregoPage } from './pages/Emprego/EmpregoPage'
 
 export function App() {
   const [activePage, setActivePage] = useState<string>('inicio')
+  const [searchTerm, setSearchTerm] = useState('')
 
-  // Garante que a opção Emprego está disponível e atualiza qual está ativa
   const updatedNavItems = initialNavItems.map((item) => {
     const isEmprego = item.id === 'emprego'
     return {
@@ -19,12 +19,19 @@ export function App() {
 
   return (
     <AppShell
-      {...({
-        navigationItems: updatedNavItems,
-        onSelectPage: setActivePage,
-      } as any)}
+      navigationItems={updatedNavItems}
+      onSelectPage={setActivePage}
+      searchTerm={searchTerm}
+      onSearchChange={setSearchTerm}
     >
-      {activePage === 'inicio' && <DashboardPage />}
+      {activePage === 'inicio' && (
+        <DashboardPage
+          searchTerm={searchTerm}
+          filterValues={{} as Parameters<typeof DashboardPage>[0]['filterValues']}
+          onFilterChange={() => {}}
+          onResetFilters={() => {}}
+        />
+      )}
       {activePage === 'emprego' && <EmpregoPage />}
     </AppShell>
   )

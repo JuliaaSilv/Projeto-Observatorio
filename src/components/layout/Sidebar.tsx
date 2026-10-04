@@ -27,17 +27,17 @@ interface SidebarProps {
 export function Sidebar({ items, onSelectPage }: SidebarProps) {
   return (
     <aside className="panel relative overflow-hidden px-4 py-5 lg:min-h-[calc(100vh-2rem)] lg:w-80 lg:px-5 lg:py-6">
-      <div className="absolute inset-x-0 top-0 h-24 bg-gradient-to-r from-brand-900 via-brand-700 to-brand-500 opacity-95" />
+      <div className="absolute inset-x-0 top-0 h-80 bg-gradient-to-r from-brand-900 via-brand-700 to-brand-500 opacity-95" />
 
       <div className="relative flex flex-col gap-6">
         <div className="rounded-3xl border border-white/20 bg-white/10 p-4 text-white backdrop-blur lg:p-5">
-          <span className="inline-flex rounded-full border border-white/20 bg-white/15 px-3 py-1 text-xs font-semibold uppercase tracking-[0.2em] text-white/85">
+          <span className="inline-flex rounded-full border border-white/20 bg-white/15 px-3 py-1 text-xs font-semibold uppercase tracking-[0.2em] text-white">
             Recife
           </span>
           <h1 className="mt-4 text-xl font-extrabold leading-tight lg:text-2xl">
             Observatório de Emprego e Renda do Recife
           </h1>
-          <p className="mt-2 text-sm leading-6 text-slate-100/85">
+          <p className="mt-2 text-sm leading-6 text-white">
             Dashboard acadêmico focado em componentização, reutilização e modularidade.
           </p>
         </div>
@@ -67,7 +67,9 @@ export function Sidebar({ items, onSelectPage }: SidebarProps) {
                     <span
                       className={[
                         'flex h-10 w-10 items-center justify-center rounded-xl',
-                        item.isActive ? 'bg-brand-900 text-white' : 'bg-slate-100 text-slate-500',
+                        item.isActive
+                          ? 'bg-brand-900 text-white'
+                          : 'bg-slate-100 text-slate-500',
                       ].join(' ')}
                     >
                       <Icon className="h-5 w-5" />

@@ -46,3 +46,20 @@ export interface DashboardHero {
   description: string
   note: string
 }
+
+export type NotificationTone = 'info' | 'positive' | 'attention'
+
+export interface DashboardNotification {
+  id: string
+  title: string
+  description: string
+  time: string
+  tone: NotificationTone
+}
+
+export interface DashboardTrendPoint {
+  period: string
+  employment: number
+  unemployment: number
+  income: number
+}
