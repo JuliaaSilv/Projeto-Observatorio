@@ -1,45 +1,38 @@
 import { useState } from 'react'
-
 import { AppShell } from './components/layout/AppShell'
-import {
-  dashboardFilters,
-  getDashboardFilterSummary,
-} from './data/mock/dashboard'
+import { navigationItems as initialNavItems } from './data/mock/dashboard'
 import { DashboardPage } from './pages/Dashboard/DashboardPage'
-import type { FilterState } from './types/dashboard'
+import { EmpregoPage } from './pages/Emprego/EmpregoPage'
 
-const initialFilterState = dashboardFilters.reduce<FilterState>((accumulator, filter) => {
-  accumulator[filter.id] = filter.defaultValue
-  return accumulator
-}, {})
-
-function App() {
+export function App() {
+  const [activePage, setActivePage] = useState<string>('inicio')
   const [searchTerm, setSearchTerm] = useState('')
-  const [filterValues, setFilterValues] = useState<FilterState>(initialFilterState)
 
-  const handleFilterChange = (filterId: string, value: string) => {
-    setFilterValues((currentValues) => ({
-      ...currentValues,
-      [filterId]: value,
-    }))
-  }
-
-  const handleResetFilters = () => {
-    setFilterValues(initialFilterState)
-  }
+  const updatedNavItems = initialNavItems.map((item) => {
+    const isEmprego = item.id === 'emprego'
+    return {
+      ...item,
+      isAvailable: item.id === 'inicio' || isEmprego ? true : item.isAvailable,
+      isActive: item.id === activePage,
+    }
+  })
 
   return (
     <AppShell
+      navigationItems={updatedNavItems}
+      onSelectPage={setActivePage}
       searchTerm={searchTerm}
       onSearchChange={setSearchTerm}
-      filterSummary={getDashboardFilterSummary(filterValues)}
     >
-      <DashboardPage
-        searchTerm={searchTerm}
-        filterValues={filterValues}
-        onFilterChange={handleFilterChange}
-        onResetFilters={handleResetFilters}
-      />
+      {activePage === 'inicio' && (
+        <DashboardPage
+          searchTerm={searchTerm}
+          filterValues={{} as Parameters<typeof DashboardPage>[0]['filterValues']}
+          onFilterChange={() => {}}
+          onResetFilters={() => {}}
+        />
+      )}
+      {activePage === 'emprego' && <EmpregoPage />}
     </AppShell>
   )
 }
